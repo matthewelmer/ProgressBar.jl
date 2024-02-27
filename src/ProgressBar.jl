@@ -1,5 +1,5 @@
 module ProgressBar
-export plain_bar, colorful_bar, colorschemes
+export plain_bar, colorful_bar, colorschemes, GREEN_COMPLETED_BAR
 
 using ColorSchemes: RGB, colorschemes, ColorScheme, get
 
@@ -65,5 +65,15 @@ function colorful_bar(completion::Real; percent::Bool=false, cscheme::ColorSchem
         "\e[0m"
     ))
 end
+
+const GREEN_COMPLETED_BAR = join(vcat(
+    "\e[32m",
+    repeat(Char(0x2501), 38),
+    "\e[0m",
+    "100%",
+    "\e[32m",
+    repeat(Char(0x2501), 38),
+    "\e[0m"
+))
 
 end
