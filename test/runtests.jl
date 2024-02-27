@@ -10,3 +10,12 @@ for i in 1:100
     print(plain_bar(i, percent=true))
 end
 println()
+
+println("Inferno bar:")
+print(colorful_bar(0, rangescale=(-0.4, 1.0)))
+for i in 1:100
+    sleep(0.05)
+    print(join([Char(0x8) for _ in 1:80]))
+    print(colorful_bar(i, percent=true, rangescale=(-0.4, 1.0)))
+end
+println()
