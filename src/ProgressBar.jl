@@ -1,5 +1,5 @@
 module ProgressBar
-export plain_bar, colorful_bar
+export plain_bar, colorful_bar, colorschemes
 
 using ColorSchemes: RGB, colorschemes, ColorScheme, get
 
