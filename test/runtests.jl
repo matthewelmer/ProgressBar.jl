@@ -30,11 +30,11 @@ end
 print(join([Char(0x8) for _ in 1:80]))
 println(GREEN_COMPLETED_BAR)
 
-println("Winter bar:")
-print(colorful_bar(0, cscheme=colorschemes[:winter]))
+println("Pink bar:")
+print(colorful_bar(0, cscheme=colorschemes[:pink]))
 for i in 1:100
     sleep(0.025)
     print(join([Char(0x8) for _ in 1:80]))
-    print(colorful_bar(i, percent=true, cscheme=colorschemes[:winter]))
+    print(colorful_bar(i, percent=true, cscheme=colorschemes[:pink]))
 end
 println()
