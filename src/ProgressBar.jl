@@ -77,8 +77,8 @@ const GREEN_COMPLETED_BAR = join(vcat(
 ))
 
 # FUTURE WORK(melmer): progress_bar function that defaults to an inferno bar
-# that turns green at 100% but can be passed optional arguments to make it plain
-# or some other color scheme or not turn green at 100% (make the simple path
-# that most people will be happy with a one-liner)
+# that hides the cursor and turns green at 100% but can be passed optional
+# arguments to configure the behavior (make the simple path that most people
+# will be happy with a one-liner)
 
 end
