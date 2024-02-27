@@ -2,3 +2,6 @@ name = "ProgressBar"
 uuid = "62317195-2977-4085-b1ce-018a546d4123"
 authors = ["matt "]
 version = "0.1.0"
+
+[deps]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
