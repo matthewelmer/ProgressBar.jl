@@ -1,10 +1,7 @@
 module ProgressBar
-export simple_bar
+export plain_bar
 
-# One way to make a unicode character: Char(0x2501)
-# Another way: "\u2501"
-
-function simple_bar(completion::Real; percent::Bool=false)
+function plain_bar(completion::Real; percent::Bool=false)
     percent_completion::Int = 0
     pereighty_completion::Int = 0
     if percent
@@ -22,11 +19,11 @@ function simple_bar(completion::Real; percent::Bool=false)
     right_filled = min(max(pereighty_completion - 42, 0), right_pad)
 
     return join(vcat(
-        [Char(0x2501) for _ in 1:left_filled],
-        [" " for _ in (left_filled + 1):left_pad],
+        repeat(Char(0x2501), left_filled),
+        repeat(" ", left_pad - left_filled),
         string(percent_completion) * "%",
-        [Char(0x2501) for _ in 1:right_filled],
-        [" " for _ in (right_filled + 1):right_pad]
+        repeat(Char(0x2501), right_filled),
+        repeat(" ", right_pad - right_filled)
     ))
 end
 
