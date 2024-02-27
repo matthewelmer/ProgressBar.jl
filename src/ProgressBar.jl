@@ -54,12 +54,12 @@ function colorful_bar(completion::Real; percent::Bool=false, cscheme::ColorSchem
     B::UInt8 = round(bar_color.b * 255)
 
     return join(vcat(
-        percent_completion == 100 ? "\e[32m" : "\e[38;2;$(R);$(G);$(B)m",
+        "\e[38;2;$(R);$(G);$(B)m",
         repeat(Char(0x2501), left_filled),
         repeat(" ", left_pad - left_filled),
         "\e[0m",
         string(percent_completion) * "%",
-        percent_completion == 100 ? "\e[32m" : "\e[38;2;$(R);$(G);$(B)m",
+        "\e[38;2;$(R);$(G);$(B)m",
         repeat(Char(0x2501), right_filled),
         repeat(" ", right_pad - right_filled),
         "\e[0m"
