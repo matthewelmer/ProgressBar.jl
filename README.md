@@ -20,5 +20,5 @@ From the Julia REPL, activate the package and run the tests:
 ```
 # (Press ] to go into package mode)
 pkg> activate .
-pkg> test ProgressBar
+pkg> test
 ```
