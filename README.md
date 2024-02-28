@@ -3,6 +3,8 @@ ProgressBar.jl
 
 Snazzy progress bars for the terminal!
 
+![A demonstration of a variety of progress bars.](./progress_bars.gif)
+
 This is just a recreational personal project, but feel free to file an issue if you'd like me to add some documentation!
 
 Getting started
