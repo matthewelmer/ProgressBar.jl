@@ -4,19 +4,15 @@ export plain_bar, colorful_bar, colorschemes, GREEN_COMPLETED_BAR
 using ColorSchemes: RGB, colorschemes, ColorScheme, get
 
 function plain_bar(completion::Real; percent::Bool=false)
-    percent_completion::Int = 0
-    pereighty_completion::Int = 0
     if percent
-        percent_completion = round(min(completion, 100))
-        pereighty_completion = round(min(completion * 80 / 100, 80))
-    else
-        percent_completion = round(min(100 * completion, 100))
-        pereighty_completion = round(min(80 * completion, 80))
+        completion /= 100
     end
 
+    percent_completion::Int = round(min(100 * completion, 100))
     left_pad = 41 - ndigits(percent_completion)
     right_pad = 38
 
+    pereighty_completion::Int = round(min(80 * completion, 80))
     left_filled = min(pereighty_completion, left_pad)
     right_filled = min(max(pereighty_completion - 42, 0), right_pad)
 
@@ -30,25 +26,19 @@ function plain_bar(completion::Real; percent::Bool=false)
 end
 
 function colorful_bar(completion::Real; percent::Bool=false, cscheme::ColorScheme=colorschemes[:inferno], rangescale=(0.0, 1.0))
-    percent_completion::Int = 0
-    pereighty_completion::Int = 0
-    bar_color::RGB = RGB(0.0, 0.0, 0.0)
     if percent
-        percent_completion = round(min(completion, 100))
-        pereighty_completion = round(min(completion * 80 / 100, 80))
-        bar_color = get(cscheme, completion / 100, rangescale)
-    else
-        percent_completion = round(min(100 * completion, 100))
-        pereighty_completion = round(min(80 * completion, 80))
-        bar_color = get(cscheme, completion, rangescale)
+        completion /= 100
     end
 
+    percent_completion::Int = round(min(100 * completion, 100))
     left_pad = 41 - ndigits(percent_completion)
     right_pad = 38
 
+    pereighty_completion::Int = round(min(80 * completion, 80))
     left_filled = min(pereighty_completion, left_pad)
     right_filled = min(max(pereighty_completion - 42, 0), right_pad)
 
+    bar_color = get(cscheme, completion, rangescale)
     R::UInt8 = round(bar_color.r * 255)
     G::UInt8 = round(bar_color.g * 255)
     B::UInt8 = round(bar_color.b * 255)
