@@ -44,7 +44,8 @@ print(colorful_bar(0, cscheme=colorschemes[:pink]))
 for i in 1:100
     sleep(0.025)
     print(join(repeat(Char(0x8), cols)))
-    print(colorful_bar(i, percent=true, cscheme=colorschemes[:pink]))
+    print(colorful_bar(i, percent=true, cscheme=colorschemes[:pink], rangescale=(-0.1, 1.75)))
 end
-println()
+print(join(repeat(Char(0x8), cols)))
+println(plain_bar(1))
 print("\e[?25h")
