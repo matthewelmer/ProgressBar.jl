@@ -15,9 +15,9 @@ function plain_bar(completion::Real; percent::Bool=false)
     left_pad = half_cols + 1 - ndigits(percent_completion)
     right_pad = half_cols - 2
 
-    pereighty_completion::Int = round(min(cols * completion, cols))
-    left_filled = min(pereighty_completion, left_pad)
-    right_filled = min(max(pereighty_completion - (half_cols + 2), 0), right_pad)
+    percolumn_completion::Int = round(min(cols * completion, cols))
+    left_filled = min(percolumn_completion, left_pad)
+    right_filled = min(max(percolumn_completion - (half_cols + 2), 0), right_pad)
 
     return join(vcat(
         repeat(Char(0x2501), left_filled),
@@ -40,9 +40,9 @@ function colorful_bar(completion::Real; percent::Bool=false, cscheme::ColorSchem
     left_pad = half_cols + 1 - ndigits(percent_completion)
     right_pad = half_cols - 2
 
-    pereighty_completion::Int = round(min(cols * completion, cols))
-    left_filled = min(pereighty_completion, left_pad)
-    right_filled = min(max(pereighty_completion - (half_cols + 2), 0), right_pad)
+    percolumn_completion::Int = round(min(cols * completion, cols))
+    left_filled = min(percolumn_completion, left_pad)
+    right_filled = min(max(percolumn_completion - (half_cols + 2), 0), right_pad)
 
     bar_color = get(cscheme, completion, rangescale)
     R::UInt8 = round(bar_color.r * 255)
