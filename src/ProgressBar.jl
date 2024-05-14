@@ -1,5 +1,5 @@
 module ProgressBar
-export plain_bar, colorful_bar, colorschemes, GREEN_COMPLETED_BAR
+export plain_bar, colorful_bar, colorschemes, green_completed_bar
 
 using ColorSchemes: RGB, colorschemes, ColorScheme, get
 
@@ -8,13 +8,16 @@ function plain_bar(completion::Real; percent::Bool=false)
         completion /= 100
     end
 
-    percent_completion::Int = round(min(100 * completion, 100))
-    left_pad = 41 - ndigits(percent_completion)
-    right_pad = 38
+    _, cols = displaysize(stdout)
+    half_cols = floor(Int, cols/2)
 
-    pereighty_completion::Int = round(min(80 * completion, 80))
+    percent_completion::Int = round(min(100 * completion, 100))
+    left_pad = half_cols + 1 - ndigits(percent_completion)
+    right_pad = half_cols - 2
+
+    pereighty_completion::Int = round(min(cols * completion, cols))
     left_filled = min(pereighty_completion, left_pad)
-    right_filled = min(max(pereighty_completion - 42, 0), right_pad)
+    right_filled = min(max(pereighty_completion - (half_cols + 2), 0), right_pad)
 
     return join(vcat(
         repeat(Char(0x2501), left_filled),
@@ -30,13 +33,16 @@ function colorful_bar(completion::Real; percent::Bool=false, cscheme::ColorSchem
         completion /= 100
     end
 
-    percent_completion::Int = round(min(100 * completion, 100))
-    left_pad = 41 - ndigits(percent_completion)
-    right_pad = 38
+    _, cols = displaysize(stdout)
+    half_cols = floor(Int, cols/2)
 
-    pereighty_completion::Int = round(min(80 * completion, 80))
+    percent_completion::Int = round(min(100 * completion, 100))
+    left_pad = half_cols + 1 - ndigits(percent_completion)
+    right_pad = half_cols - 2
+
+    pereighty_completion::Int = round(min(cols * completion, cols))
     left_filled = min(pereighty_completion, left_pad)
-    right_filled = min(max(pereighty_completion - 42, 0), right_pad)
+    right_filled = min(max(pereighty_completion - (half_cols + 2), 0), right_pad)
 
     bar_color = get(cscheme, completion, rangescale)
     R::UInt8 = round(bar_color.r * 255)
@@ -56,13 +62,13 @@ function colorful_bar(completion::Real; percent::Bool=false, cscheme::ColorSchem
     ))
 end
 
-const GREEN_COMPLETED_BAR = join(vcat(
+green_completed_bar() = join(vcat(
     "\e[32m",
-    repeat(Char(0x2501), 38),
+    repeat(Char(0x2501), floor(Int, displaysize(stdout)[2] / 2) - 2),
     "\e[0m",
     "100%",
     "\e[32m",
-    repeat(Char(0x2501), 38),
+    repeat(Char(0x2501), floor(Int, displaysize(stdout)[2] / 2) - 2),
     "\e[0m"
 ))
 
