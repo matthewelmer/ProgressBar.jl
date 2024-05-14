@@ -17,7 +17,8 @@ function plain_bar(completion::Real; percent::Bool=false)
 
     percolumn_completion::Int = round(min(cols * completion, cols))
     left_filled = min(percolumn_completion, left_pad)
-    right_filled = min(max(percolumn_completion - (half_cols + 2), 0), right_pad)
+    right_filled = min(max(
+        percolumn_completion - (half_cols + 2), 0), right_pad)
 
     return join(vcat(
         repeat(Char(0x2501), left_filled),
@@ -28,7 +29,13 @@ function plain_bar(completion::Real; percent::Bool=false)
     ))
 end
 
-function colorful_bar(completion::Real; percent::Bool=false, cscheme::ColorScheme=colorschemes[:inferno], rangescale=(0.0, 1.0))
+function colorful_bar(
+    completion::Real,
+    ;
+    percent::Bool=false,
+    cscheme::ColorScheme=colorschemes[:inferno],
+    rangescale=(0.0, 1.0)
+)
     if percent
         completion /= 100
     end
@@ -42,7 +49,8 @@ function colorful_bar(completion::Real; percent::Bool=false, cscheme::ColorSchem
 
     percolumn_completion::Int = round(min(cols * completion, cols))
     left_filled = min(percolumn_completion, left_pad)
-    right_filled = min(max(percolumn_completion - (half_cols + 2), 0), right_pad)
+    right_filled = min(max(
+        percolumn_completion - (half_cols + 2), 0), right_pad)
 
     bar_color = get(cscheme, completion, rangescale)
     R::UInt8 = round(bar_color.r * 255)
